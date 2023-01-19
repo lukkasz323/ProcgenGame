@@ -1,12 +1,9 @@
-﻿namespace ProcgenGame;
+﻿namespace ProcgenGame.Core;
 
-public class Player
+public class Player : Entity
 {
-    public int Size { get; } = 32;
-    public Rectangle Rectangle { get; private set; }
-
-    public Player(Level level)
+    public Player(Vector2 spawnOffset, Scene scene) : base(spawnOffset, scene)
     {
-        Rectangle = new Rectangle(level.Center.x - (Size / 2), -3 * level.TileSize + level.Center.y - (Size / 2), Size, Size);
+
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ProcgenGame;
+﻿namespace ProcgenGame.Core;
 
 public class Game1 : Game
 {
@@ -11,17 +11,16 @@ public class Game1 : Game
     public Dictionary<TextureName, Texture2D> Textures { get; private set; } = new();
     public Dictionary<InputAction, bool> ActionIsLocked { get; private set; } = new();
 
-    public Level Level { get; private set; }
-    public Player Player { get; private set; }
-    
+    public Scene Scene { get; private set; }
+
     public Game1()
     {
         Graphics = new GraphicsDeviceManager(this);
-        
+
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
-    
+
     protected override void Initialize()
     {
         Graphics.PreferredBackBufferWidth = 832;
@@ -34,11 +33,12 @@ public class Game1 : Game
             ActionIsLocked[action] = false;
         }
 
-        Level = new Level();
-        Player = new Player(Level);
         SpriteBatch = new(GraphicsDevice);
+
         UpdateManager = new UpdateManager(this);
         DrawManager = new DrawManager(this);
+
+        Scene = new Scene();
 
         base.Initialize();
     }

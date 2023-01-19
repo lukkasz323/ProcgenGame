@@ -1,4 +1,4 @@
-﻿namespace ProcgenGame;
+﻿namespace ProcgenGame.Core;
 
 public static class Utils
 {

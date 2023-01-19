@@ -1,4 +1,6 @@
-﻿namespace ProcgenGame;
+﻿using Microsoft.Xna.Framework.Input;
+
+namespace ProcgenGame.Core;
 
 public class DrawManager
 {
@@ -15,17 +17,18 @@ public class DrawManager
     {
         _batch.Begin();
 
-        DrawLevel();
+        DrawRoom();
         DrawPlayer();
 
-        _batch.DrawString(_game.Fonts[FontName.Default], $"{_game.Player.Rectangle}", new Vector2(4, 0), Color.Black);
+        _batch.DrawString(_game.Fonts[FontName.Default], $"{_game.Scene.Player.Position}", new Vector2(4, 0), Color.Black);
+        _batch.DrawString(_game.Fonts[FontName.Default], $"{Keyboard.GetState().IsKeyDown(Keys.W)}", new Vector2(4, 16), Color.Black);
 
         _batch.End();
     }
 
-    private void DrawLevel()
+    private void DrawRoom()
     {
-        foreach (Tile tile in _game.Level.Tiles)
+        foreach (Tile tile in _game.Scene.Room.Tiles)
         {
             Texture2D texture = _game.Textures[(TextureName)Enum.ToObject(typeof(TextureName), tile.Type)];
 
@@ -35,6 +38,9 @@ public class DrawManager
 
     private void DrawPlayer()
     {
-        _batch.Draw(_game.Textures[TextureName.White], _game.Player.Rectangle, Color.Red);
+        Vector2 position = _game.Scene.Player.Position;
+        int size = _game.Scene.Player.Size;
+
+        _batch.Draw(_game.Textures[TextureName.White], new Rectangle((int)position.X, (int)position.Y, size, size), Color.Red);
     }
 }

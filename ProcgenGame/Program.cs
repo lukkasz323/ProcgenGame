@@ -1,3 +1,3 @@
 ﻿
-using var game = new ProcgenGame.Game1();
+using var game = new ProcgenGame.Core.Game1();
 game.Run();

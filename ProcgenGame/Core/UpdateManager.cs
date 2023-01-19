@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace ProcgenGame;
+namespace ProcgenGame.Core;
 
 public class UpdateManager
 {
@@ -13,10 +13,10 @@ public class UpdateManager
 
     public void Update(GameTime gameTime)
     {
-        HandleInputs();
+        HandleInputs(gameTime);
     }
 
-    private void HandleInputs()
+    private void HandleInputs(GameTime gameTime)
     {
         InputAction action;
 
@@ -28,6 +28,7 @@ public class UpdateManager
             _game.Exit();
         }
 
+        // Fullscreen
         action = InputAction.ToggleFullscreen;
         if (!_game.ActionIsLocked[action])
         {
@@ -44,6 +45,12 @@ public class UpdateManager
             {
                 _game.ActionIsLocked[action] = false;
             }
+        }
+
+        // Player movement
+        if (keyboard.IsKeyDown(Keys.W))
+        {
+
         }
 
         // Gamepad
