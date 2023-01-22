@@ -2,7 +2,21 @@
 
 public enum InputAction
 {
+    None,
     ToggleFullscreen,
+}
+
+public enum Direction
+{
+    North = 0,
+    South = 1,
+    West = 2,
+    East = 3,
+}
+
+public enum FontName
+{
+    Default,
 }
 
 public enum TextureName
@@ -13,7 +27,12 @@ public enum TextureName
     Dirt = 1,
 }
 
-public enum FontName
+[Flags]
+public enum FlagsInput
 {
-    Default,
+    None    = 0,
+    Up      = 1 << 0,
+    Down    = 1 << 1,
+    Left    = 1 << 2,
+    Right   = 1 << 3,
 }
