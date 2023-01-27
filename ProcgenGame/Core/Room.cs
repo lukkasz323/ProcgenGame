@@ -23,13 +23,15 @@ public class Room
     public int Width { get => _tileTypes.GetLength(1) * _scene.TileSize; }
     public int Height { get => _tileTypes.GetLength(0) * _scene.TileSize; }
     public Vector2 Center { get => new(Position.X + (Width / 2), Position.Y + (Height / 2)); }
-
     public Tile[,] Tiles { get; private set; }
+    public Point FloorPosition { get; private set; }
+    public int Depth { get; private set; }
 
-
-    public Room(Scene scene)
+    public Room(Scene scene, Point floorPosition, int depth)
     {
         _scene = scene;
+        FloorPosition = floorPosition;
+        Depth = depth;
 
         (int x, int y) length = (_tileTypes.GetLength(1), _tileTypes.GetLength(0));
 

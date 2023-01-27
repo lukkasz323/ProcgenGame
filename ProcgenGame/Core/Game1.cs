@@ -1,73 +1,71 @@
-﻿namespace ProcgenGame.Core;
+﻿using ProcgenGame.Core.Systems;
 
+namespace ProcgenGame.Core;
+
+/// <summary> Game starts here and then updates itself till the end. </summary>
 public class Game1 : Game
 {
     public GraphicsDeviceManager Graphics { get; }
     public SpriteBatch SpriteBatch { get; private set; }
-    public UpdateManager UpdateManager { get; private set; }
-    public DrawManager DrawManager { get; private set; }
-
-    public Dictionary<FontName, SpriteFont> Fonts { get; private set; } = new();
-    public Dictionary<TextureName, Texture2D> Textures { get; private set; } = new();
-    public Dictionary<InputAction, bool> ActionIsLocked { get; private set; } = new();
-
+    public UpdateController UpdateController { get; private set; }
     public Scene Scene { get; private set; }
+    public AssetStorage Assets { get; private set; }
 
     public Game1()
     {
         Graphics = new GraphicsDeviceManager(this);
-
         Content.RootDirectory = "Content";
+
         IsMouseVisible = true;
+
+        // FPS Limiter
+        IsFixedTimeStep = false;
     }
 
+    /// <summary> Ran after the constructor. </summary>
     protected override void Initialize()
     {
+        SpriteBatch = new SpriteBatch(GraphicsDevice);
+        Assets = new(Fonts: new(), Textures: new());
+        Scene = new Scene(this);
+        UpdateController = new UpdateController(this);
+
         Graphics.PreferredBackBufferWidth = 832;
         Graphics.PreferredBackBufferHeight = 704;
         Graphics.HardwareModeSwitch = false;
         Graphics.ApplyChanges();
 
-        foreach (InputAction action in Enum.GetValues(typeof(InputAction)))
-        {
-            ActionIsLocked[action] = false;
-        }
-
-        SpriteBatch = new(GraphicsDevice);
-
-        UpdateManager = new UpdateManager(this);
-        DrawManager = new DrawManager(this);
-
-        Scene = new Scene();
-
         base.Initialize();
     }
 
+    /// <summary> Ran after Initalize(). Should be exclusively responsible for loading game assets.</summary>
     protected override void LoadContent()
     {
-        foreach (TextureName textureName in Enum.GetValues(typeof(TextureName)))
+        foreach (TextureName textureName in Enum.GetValues<TextureName>())
         {
-            Textures.Add(textureName, Content.Load<Texture2D>($"Textures/{textureName}"));
+            Assets.Textures.Add(textureName, Content.Load<Texture2D>($"Textures/{textureName}"));
         }
-        foreach (FontName fontName in Enum.GetValues(typeof(FontName)))
+        foreach (FontName fontName in Enum.GetValues<FontName>())
         {
-            Fonts.Add(fontName, Content.Load<SpriteFont>($"Fonts/{fontName}"));
+            Assets.Fonts.Add(fontName, Content.Load<SpriteFont>($"Fonts/{fontName}"));
         }
     }
 
+    /// <summary> Ran first after LoadContent().
+    /// Runs in a loop alongside (before) Draw() till near the end of the game's lifecycle. </summary>
     protected override void Update(GameTime gameTime)
     {
-        UpdateManager.Update(gameTime);
+        UpdateController.Update(gameTime); 
 
-        base.Update(gameTime);
+        base.Update(gameTime); // Must be last!
     }
 
+    /// <summary> Ran first after Update().
+    /// Runs in a loop alongside (after) Update() till near the end of the game's lifecycle. </summary>
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        UpdateController.Draw(gameTime);
 
-        DrawManager.Draw(gameTime);
-
-        base.Draw(gameTime);
+        base.Draw(gameTime); // Must be last!
     }
 }

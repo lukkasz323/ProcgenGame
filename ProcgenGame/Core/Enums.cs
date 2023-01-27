@@ -14,21 +14,27 @@ public enum Direction
     East = 3,
 }
 
+public enum AssetName
+{
+    Texture,
+    Font,
+}
+
 public enum FontName
 {
-    Default,
+    Default = 0,
 }
 
 public enum TextureName
 {
-    Debug1 = -9,
-    Border = -1,
-    White = 0,
-    Dirt = 1,
+    Debug1  = -9,
+    Border  = -1,
+    White   = 0,
+    Dirt    = 1,
 }
 
-[Flags]
-public enum FlagsInput
+//[Flags]
+public enum StateFlags
 {
     None    = 0,
     Up      = 1 << 0,
