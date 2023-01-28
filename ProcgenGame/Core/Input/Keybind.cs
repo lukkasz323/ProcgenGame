@@ -1,28 +1,32 @@
-using Microsoft.Xna.Framework.Input;
-
 namespace ProcgenGame.Core.Input;
 
 /// <summary>
 /// Represents a keybinding in the game.
 /// </summary>
-public class Keybind
+public enum KeybindAction
 {
     /// <summary>
-    /// The display name for the keybind.
+    /// Use the keybind to close the game.
     /// </summary>
-    public string Name { get; set; }
+    Close,
     /// <summary>
-    /// The keys required to activate the keybind.
+    /// Use the keybind to toggle fullscreen mode.
     /// </summary>
-    public IEnumerable<Keys> Keys { get; set; }
+    ToggleFullscreen,
     /// <summary>
-    /// Creates a new keybind.
+    /// Use the keybind to move the player up.
     /// </summary>
-    /// <param name="name">The display name for the keybind.</param>
-    /// <param name="keys">The keys required to activate the keybind.</param>
-    public Keybind(string name, params Keys[] keys)
-    {
-        Name = name;
-        Keys = keys;
-    }
+    MoveUp,
+    /// <summary>
+    /// Use the keybind to move the player down.
+    /// </summary>
+    MoveDown,
+    /// <summary>
+    /// Use the keybind to move the player left.
+    /// </summary>
+    MoveLeft,
+    /// <summary>
+    /// Use the keybind to move the player right.
+    /// </summary>
+    MoveRight
 }
