@@ -4,8 +4,7 @@
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services => services
         .AddLogging(BuildLogging)
-        .AddSingleton<Game1>()
-        .AddHostedService<GameService>()
+        .AddGame<Game1>()
 ).Build();
 await host.RunAsync();
 
