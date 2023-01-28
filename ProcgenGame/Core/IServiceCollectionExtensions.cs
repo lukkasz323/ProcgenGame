@@ -18,6 +18,6 @@ namespace ProcgenGame.Core
         /// <returns>The current <see cref="IServiceCollection"/> instance.</returns>
         public static IServiceCollection AddGame<T>(this IServiceCollection services) where T : Game =>
             services.AddSingleton<T>()
-                    .AddHostedService<GameService>();
+                    .AddHostedService<GameService<T>>();
     }
 }
