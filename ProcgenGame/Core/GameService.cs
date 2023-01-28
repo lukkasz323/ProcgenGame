@@ -16,7 +16,7 @@ public class GameService : IHostedService
         _applicationLifetime = applicationLifetime;
     }
     /// <summary>
-    /// Starts the game.
+    /// Wires up support for starting the game.
     /// </summary>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> for cancelling the operation.</param>
     /// <returns>A <see cref="Task"/> which defines the state of the operation.</returns>
@@ -36,8 +36,14 @@ public class GameService : IHostedService
         _applicationLifetime.StopApplication();
         return Task.CompletedTask;
     }
+    /// <summary>
+    /// Handles the game exiting event to ensure the service stops properly.
+    /// </summary>
     private void HandleGameExiting(object sender, EventArgs e) =>
         StopAsync(new CancellationToken());
+    /// <summary>
+    /// Handles the startup of the service and starts the game.
+    /// </summary>
     private void HandleServiceStart() =>
         _game.Run();
 }
