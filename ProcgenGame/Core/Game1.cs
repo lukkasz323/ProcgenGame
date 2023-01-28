@@ -1,4 +1,5 @@
 ﻿using ProcgenGame.Core.Systems;
+using ProcgenGame.Core.Scene;
 
 namespace ProcgenGame.Core;
 
@@ -8,7 +9,7 @@ public class Game1 : Game
     public GraphicsDeviceManager Graphics { get; }
     public SpriteBatch SpriteBatch { get; private set; }
     public UpdateController UpdateController { get; private set; }
-    public Scene Scene { get; private set; }
+    public GameScene Scene { get; private set; }
     public AssetStorage Assets { get; private set; }
 
     public Game1()
@@ -26,8 +27,8 @@ public class Game1 : Game
     protected override void Initialize()
     {
         SpriteBatch = new SpriteBatch(GraphicsDevice);
-        Assets = new(Fonts: new(), Textures: new());
-        Scene = new Scene(this);
+        Assets = new AssetStorage();
+        Scene = new GameScene(this);
         UpdateController = new UpdateController(this);
 
         Graphics.PreferredBackBufferWidth = 832;
@@ -55,7 +56,7 @@ public class Game1 : Game
     /// Runs in a loop alongside (before) Draw() till near the end of the game's lifecycle. </summary>
     protected override void Update(GameTime gameTime)
     {
-        UpdateController.Update(gameTime); 
+        UpdateController.Update(gameTime);
 
         base.Update(gameTime); // Must be last!
     }

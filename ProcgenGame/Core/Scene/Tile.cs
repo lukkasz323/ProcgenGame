@@ -1,4 +1,4 @@
-﻿namespace ProcgenGame.Core;
+﻿namespace ProcgenGame.Core.Scene;
 
 public class Tile
 {

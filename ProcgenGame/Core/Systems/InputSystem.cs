@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using ProcgenGame.Core.Scene;
 
 namespace ProcgenGame.Core.Systems;
 
@@ -6,7 +6,7 @@ namespace ProcgenGame.Core.Systems;
 public class InputSystem : IUpdateSystem
 {
     private Game1 _game;
-    private Scene _scene;
+    private GameScene _scene;
     private Dictionary<InputAction, bool> _actionLocks = new();
 
     public InputSystem(Game1 game)

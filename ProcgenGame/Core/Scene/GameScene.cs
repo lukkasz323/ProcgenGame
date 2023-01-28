@@ -1,10 +1,10 @@
 ﻿using ProcgenGame.Core.Components;
 using ProcgenGame.Core.Entities;
 
-namespace ProcgenGame.Core;
+namespace ProcgenGame.Core.Scene;
 
 /// <summary> Contains the game world. </summary>
-public class Scene
+public class GameScene
 {
     readonly Game1 _game;
 
@@ -18,7 +18,7 @@ public class Scene
     public int TileSize { get; } = 64;
     public int Floor { get; private set; } = 1;
 
-    public Scene(Game1 game)
+    public GameScene(Game1 game)
     {
         _game = game;
 

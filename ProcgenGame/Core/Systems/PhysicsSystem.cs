@@ -1,11 +1,12 @@
 ﻿using ProcgenGame.Core.Components;
+using ProcgenGame.Core.Scene;
 
 namespace ProcgenGame.Core.Systems;
 
 public class PhysicsSystem : IUpdateSystem
 {
     private readonly Game1 _game;
-    private readonly Scene _scene;
+    private readonly GameScene _scene;
     private readonly ComponentRegister _componentRegister;
     private readonly List<PhysicsComponent> _physicsComponents;
     private readonly List<TransformComponent> _transformComponents;

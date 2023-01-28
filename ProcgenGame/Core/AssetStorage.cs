@@ -1,5 +1,9 @@
 ﻿namespace ProcgenGame.Core;
 
-public record AssetStorage(
-        Dictionary<FontName, SpriteFont> Fonts, 
-        Dictionary<TextureName, Texture2D> Textures);
+public class AssetStorage
+{
+    public Dictionary<FontName, SpriteFont> Fonts { get; } = new();
+    public Dictionary<TextureName, Texture2D> Textures { get; } = new();
+}
+
+
