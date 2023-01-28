@@ -34,4 +34,10 @@
     <Message Text="Restoring dotnet tools" Importance="High" />
     <Exec Command="dotnet tool restore" />
   </Target>
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\lukas\source\repos\ProcgenGame\ProcgenGame\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\lukas\source\repos\ProcgenGame\ProcgenGame\.editorconfig" />
+  </ItemGroup>
 </Project>
