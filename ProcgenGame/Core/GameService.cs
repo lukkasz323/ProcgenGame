@@ -5,13 +5,13 @@ namespace ProcgenGame.Core;
 /// </summary>
 public class GameService : IHostedService
 {
-    private readonly Game _game;
+    private readonly Game1 _game;
     private readonly IHostApplicationLifetime _applicationLifetime;
     /// <summary>
     /// Creates a new <see cref="GameService"/> instance.
     /// </summary>
     /// <param name="game">The game to run.</param>
-    public GameService(Game game, IHostApplicationLifetime applicationLifetime) {
+    public GameService(Game1 game, IHostApplicationLifetime applicationLifetime) {
         _game = game;
         _applicationLifetime = applicationLifetime;
     }
