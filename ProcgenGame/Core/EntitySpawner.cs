@@ -1,6 +1,6 @@
 ﻿namespace ProcgenGame.Core;
 
-public class EntitySpawner
+sealed class EntitySpawner
 {
 
 }

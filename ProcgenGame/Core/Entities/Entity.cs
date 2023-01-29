@@ -2,7 +2,7 @@
 
 namespace ProcgenGame.Core.Entities;
 
-public class Entity
+class Entity
 {
     private readonly int _id = GlobalState.AutoId();
     private readonly List<Component> _components = new();

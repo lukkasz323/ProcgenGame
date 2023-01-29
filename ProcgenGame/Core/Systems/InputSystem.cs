@@ -3,7 +3,7 @@
 namespace ProcgenGame.Core.Systems;
 
 /// <summary> Reponsible for processing player inputs for other update systems to act upon. </summary>
-public class InputSystem : IUpdateSystem
+sealed class InputSystem : IUpdateSystem
 {
     private Game1 _game;
     private GameScene _scene;

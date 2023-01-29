@@ -1,7 +1,7 @@
 ﻿namespace ProcgenGame.Core.Systems;
 
 /// <summary> Updates the game state, to be used in a loop. </summary>
-public class UpdateEngine
+sealed class UpdateEngine
 {
     DrawSystem _draw;
     InputSystem _input;

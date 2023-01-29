@@ -1,6 +1,6 @@
 ﻿namespace ProcgenGame.Core.Scene;
 
-public class Tile
+sealed class Tile
 {
     public Rectangle Rectangle { get; private set; }
     public int Type { get; private set; }

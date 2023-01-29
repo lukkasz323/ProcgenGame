@@ -2,7 +2,7 @@
 
 namespace ProcgenGame.Core;
 
-public class EntityManager
+sealed class EntityManager
 {
     readonly Dictionary<int, Entity> _entitiesById = new();
 

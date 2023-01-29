@@ -3,7 +3,7 @@ using ProcgenGame.Core.Scene;
 
 namespace ProcgenGame.Core.Systems;
 
-public class PhysicsSystem : IUpdateSystem
+sealed class PhysicsSystem : IUpdateSystem
 {
     private readonly Game1 _game;
     private readonly GameScene _scene;

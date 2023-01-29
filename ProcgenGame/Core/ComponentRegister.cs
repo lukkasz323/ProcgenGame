@@ -3,7 +3,7 @@
 namespace ProcgenGame.Core;
 
 /// <summary> Registers components for update systems. </summary>
-public class ComponentRegister
+sealed class ComponentRegister
 {
     readonly Dictionary<Type, IList> _componentCollections = new()
     {

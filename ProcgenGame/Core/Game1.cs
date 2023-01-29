@@ -5,7 +5,7 @@ namespace ProcgenGame.Core;
 
 /// <summary> Game starts here and then updates itself till the end.
 /// Methods in this class are called externally by the framework.</summary>
-public class Game1 : Game
+sealed class Game1 : Game
 {
     public GraphicsDeviceManager Graphics { get; }
     public SpriteBatch SpriteBatch { get; private set; }
