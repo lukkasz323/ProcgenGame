@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace ProcgenGame.Core;
+﻿namespace ProcgenGame.Core;
 
 public static class GlobalState
 {
