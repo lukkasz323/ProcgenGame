@@ -4,7 +4,7 @@ using ProcgenGame.Core.Entities;
 namespace ProcgenGame.Core.Scene;
 
 /// <summary> Contains the game world. </summary>
-public class GameScene
+internal sealed class GameScene
 {
     readonly Game1 _game;
 

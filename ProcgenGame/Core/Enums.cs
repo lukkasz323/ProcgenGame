@@ -1,11 +1,5 @@
 ﻿namespace ProcgenGame.Core;
 
-public enum InputAction
-{
-    None,
-    ToggleFullscreen,
-}
-
 public enum Direction
 {
     North = 0,

@@ -1,6 +1,6 @@
 ﻿namespace ProcgenGame.Core.Scene;
 
-public class Room
+internal sealed class Room
 {
     private GameScene _scene;
 

@@ -1,9 +1,11 @@
-﻿using ProcgenGame.Core.Scene;
+using ProcgenGame.Core.Input;
+using ProcgenGame.Core.Scene;
 
 namespace ProcgenGame.Core.Systems;
 
 /// <summary> Reponsible for processing player inputs for other update systems to act upon. </summary>
-public class InputSystem : IUpdateSystem
+[Obsolete("Use InputProcessor instead.")]
+internal sealed class InputSystem : IUpdateSystem
 {
     private Game1 _game;
     private GameScene _scene;
