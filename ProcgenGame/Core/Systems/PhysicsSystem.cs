@@ -2,7 +2,7 @@
 
 namespace ProcgenGame.Core.Systems;
 
-public class PhysicsSystem : IUpdateSystem
+internal sealed class PhysicsSystem : IUpdateSystem
 {
     private readonly Game1 _game;
     private readonly Scene _scene;
