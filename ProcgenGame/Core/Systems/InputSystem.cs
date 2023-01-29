@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Input;
+using ProcgenGame.Core.Input;
 
 namespace ProcgenGame.Core.Systems;
 
