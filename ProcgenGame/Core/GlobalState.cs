@@ -2,7 +2,7 @@
 
 public static class GlobalState
 {
-    static int _autoId;
+    static int _autoId = -1;
 
     public static int Flags { get; set; }
 
