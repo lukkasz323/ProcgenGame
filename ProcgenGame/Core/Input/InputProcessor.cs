@@ -11,6 +11,12 @@ public class InputProcessor : IFrameProcessor
     private readonly GraphicsDeviceManager _graphics;
     private readonly InputOptions _options;
     private readonly Dictionary<InputAction?, bool> _actionLocks;
+    /// <summary>
+    /// Creates a new <see cref="InputProcessor"/> instance.
+    /// </summary>
+    /// <param name="options">The <see cref="InputOptions"/> utilized to configure the instance.</param>
+    /// <param name="game">The <see cref="Game"/> instance that should be utilized to handle exit requests.</param>
+    /// <param name="graphics">The <see cref="GraphicsDeviceManager"/> instance that should be utilized to handle fullscreen requests.</param>
     public InputProcessor(InputOptions options, Game game, GraphicsDeviceManager graphics)
     {
         _game = game;
@@ -20,12 +26,11 @@ public class InputProcessor : IFrameProcessor
         foreach (InputAction action in Enum.GetValues<InputAction>())
             _ = _actionLocks.TryAdd(action, false);
     }
+    /// <inheritdoc/>
     public void Process(GameTime gameTime)
     {
-        // Get the current keyboard state to handle input.
-        KeyboardState keyboard = Keyboard.GetState();
-        Keys[] pressedKeys = keyboard.GetPressedKeys();
-        if (!TryDetermineAction(pressedKeys, out InputAction? requestedAction))
+        // Determine if an action is requested by the user's input.
+        if (!TryDetermineAction(out InputAction? requestedAction))
             return;
 
         try
@@ -43,8 +48,16 @@ public class InputProcessor : IFrameProcessor
             _actionLocks[requestedAction] = true;
         }
     }
-    private bool TryDetermineAction(IEnumerable<Keys> pressedKeys, [NotNullWhen(true)] out InputAction? requestedAction)
+    /// <summary>
+    /// Attempts to determine the action that should be performed based on the pressed keys.
+    /// </summary>
+    /// <param name="pressedKeys">The keys currently being pressed by the user.</param>
+    /// <param name="requestedAction"></param>
+    /// <returns></returns>
+    private bool TryDetermineAction([NotNullWhen(true)] out InputAction? requestedAction)
     {
+        KeyboardState keyboard = Keyboard.GetState();
+        Keys[] pressedKeys = keyboard.GetPressedKeys();
         foreach ((InputAction action, IEnumerable<Keys> keys) in _options.Bindings)
         {
             if (pressedKeys.All(keys.Contains))
