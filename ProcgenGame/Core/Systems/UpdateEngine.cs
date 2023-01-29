@@ -1,13 +1,13 @@
 ﻿namespace ProcgenGame.Core.Systems;
 
-/// <summary> Controls the execution and order of game updating systems. </summary>
-public class UpdateController
+/// <summary> Updates the game state, to be used in a loop. </summary>
+public class UpdateEngine
 {
     DrawSystem _draw;
     InputSystem _input;
     PhysicsSystem _physics;
 
-    public UpdateController(Game1 game)
+    public UpdateEngine(Game1 game)
     {
         _input = new InputSystem(game);
         _physics = new PhysicsSystem(game);

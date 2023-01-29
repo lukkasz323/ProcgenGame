@@ -1,11 +1,12 @@
 ﻿using ProcgenGame.Core.Components;
+using ProcgenGame.Core.Scene;
 
 namespace ProcgenGame.Core.Systems;
 
 class DrawSystem : IUpdateSystem
 {
     private readonly Game1 _game;
-    private readonly Scene _scene;
+    private readonly GameScene _scene;
     private readonly SpriteBatch _batch;
     private readonly Dictionary<FontName, SpriteFont> _fonts;
     private readonly Dictionary<TextureName, Texture2D> _textures;
@@ -22,8 +23,8 @@ class DrawSystem : IUpdateSystem
         _textures = game.Assets.Textures;
         _textures = game.Assets.Textures;
         _componentRegister = game.Scene.ComponentRegister;
-        _drawComponents = _componentRegister.GetComponentCollection<DrawComponent>();
-        _transformComponents = _componentRegister.GetComponentCollection<TransformComponent>();
+        _drawComponents = _componentRegister.GetComponentsOfType<DrawComponent>();
+        _transformComponents = _componentRegister.GetComponentsOfType<TransformComponent>();
     }
 
     public void Process(GameTime gameTime)

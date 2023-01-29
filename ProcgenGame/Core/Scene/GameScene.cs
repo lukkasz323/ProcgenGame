@@ -1,24 +1,24 @@
 ﻿using ProcgenGame.Core.Components;
 using ProcgenGame.Core.Entities;
 
-namespace ProcgenGame.Core;
+namespace ProcgenGame.Core.Scene;
 
 /// <summary> Contains the game world. </summary>
-internal sealed class Scene
+internal sealed class GameScene
 {
     readonly Game1 _game;
 
     public ComponentRegister ComponentRegister { get; } = new();
     public EntitySpawner EntitySpawner { get; } = new();
     public EntityManager EntityManager { get; } = new();
-    public Player Player { get; }
+    public Entity Player { get; }
     public List<Room> Rooms { get; }
     public Room Room { get; }
     public Random Rng { get; } = new();
     public int TileSize { get; } = 64;
     public int Floor { get; private set; } = 1;
 
-    public Scene(Game1 game)
+    public GameScene(Game1 game)
     {
         _game = game;
 
@@ -26,6 +26,8 @@ internal sealed class Scene
         Room = new Room(this, Point.Zero, 0); // <--- to be removed
 
         // New entity creation (Player)
+        Player = new Entity(ComponentRegister);
+        Player.AddComponent<DrawComponent>();
         //EntityManager.AddEntity(new Player());
         //EntityManager.SetPosition(this, new Vector2(0, -3));
     }

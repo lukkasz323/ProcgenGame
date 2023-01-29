@@ -1,8 +1,8 @@
-﻿namespace ProcgenGame.Core;
+﻿namespace ProcgenGame.Core.Scene;
 
 public class Room
 {
-    private Scene _scene;
+    private GameScene _scene;
 
     private int[,] _tileTypes = new int[,]
     {
@@ -22,12 +22,12 @@ public class Room
     public Vector2 Position { get; } = new(64, 0);
     public int Width { get => _tileTypes.GetLength(1) * _scene.TileSize; }
     public int Height { get => _tileTypes.GetLength(0) * _scene.TileSize; }
-    public Vector2 Center { get => new(Position.X + (Width / 2), Position.Y + (Height / 2)); }
+    public Vector2 Center { get => new(Position.X + Width / 2, Position.Y + Height / 2); }
     public Tile[,] Tiles { get; private set; }
     public Point FloorPosition { get; private set; }
     public int Depth { get; private set; }
 
-    public Room(Scene scene, Point floorPosition, int depth)
+    public Room(GameScene scene, Point floorPosition, int depth)
     {
         _scene = scene;
         FloorPosition = floorPosition;
@@ -44,8 +44,8 @@ public class Room
                 Tiles[y, x] = new Tile(
                     _tileTypes[y, x],
                     new Rectangle(
-                        (int)Position.X + (x * _scene.TileSize),
-                        (int)Position.Y + (y * _scene.TileSize),
+                        (int)Position.X + x * _scene.TileSize,
+                        (int)Position.Y + y * _scene.TileSize,
                         _scene.TileSize,
                         _scene.TileSize));
             }

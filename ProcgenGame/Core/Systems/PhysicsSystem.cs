@@ -1,11 +1,12 @@
 ﻿using ProcgenGame.Core.Components;
+using ProcgenGame.Core.Scene;
 
 namespace ProcgenGame.Core.Systems;
 
 internal sealed class PhysicsSystem : IUpdateSystem
 {
     private readonly Game1 _game;
-    private readonly Scene _scene;
+    private readonly GameScene _scene;
     private readonly ComponentRegister _componentRegister;
     private readonly List<PhysicsComponent> _physicsComponents;
     private readonly List<TransformComponent> _transformComponents;
@@ -15,8 +16,8 @@ internal sealed class PhysicsSystem : IUpdateSystem
         _game = game;
         _scene = game.Scene;
         _componentRegister = game.Scene.ComponentRegister;
-        _physicsComponents = _componentRegister.GetComponentCollection<PhysicsComponent>();
-        _transformComponents = _componentRegister.GetComponentCollection<TransformComponent>();
+        _physicsComponents = _componentRegister.GetComponentsOfType<PhysicsComponent>();
+        _transformComponents = _componentRegister.GetComponentsOfType<TransformComponent>();
     }
 
     public void Process(GameTime gameTime)
