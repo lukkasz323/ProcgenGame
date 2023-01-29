@@ -35,7 +35,10 @@ public class InputProcessor : IFrameProcessor
 
         try
         {
-            // These are very specific actions.
+            // Lock the requested action.
+            _actionLocks[requestedAction] = false;
+
+            // Handle special actions.
             switch (requestedAction)
             {
                 case InputAction.Close: _game.Exit(); return;
@@ -45,7 +48,7 @@ public class InputProcessor : IFrameProcessor
             // TODO: Handle player interactions.
         } finally
         {
-            _actionLocks[requestedAction] = true;
+            _actionLocks[requestedAction] = false;
         }
     }
     /// <summary>
