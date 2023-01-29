@@ -4,9 +4,9 @@ namespace ProcgenGame.Core.Entities;
 
 class Entity
 {
-    private readonly int _id = GlobalState.AutoId();
-    private readonly List<Component> _components = new();
-    private readonly ComponentRegister _componentRegister;
+    readonly int _id = GlobalState.AutoId();
+    readonly List<Component> _components = new();
+    readonly ComponentRegister _componentRegister;
 
     public Entity(ComponentRegister componentManager)
     {
@@ -16,11 +16,11 @@ class Entity
     public T GetComponent<T>()
         where T : Component
     {
-        foreach (T component in _components)
+        foreach (Component component in _components)
         {
             if (component.GetType() == typeof(T))
             {
-                return component;
+                return (T)component;
             }
         }
         throw new InvalidOperationException($"Required item was not found.");
@@ -29,7 +29,7 @@ class Entity
     public void AddComponent<T>()
         where T : Component, new()
     {
-        T component = new();
+        var component = new T();
         component.EntityId = _id;
         _components.Add(component);
         _componentRegister.RegisterComponent(component);

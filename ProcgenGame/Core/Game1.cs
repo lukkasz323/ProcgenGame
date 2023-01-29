@@ -8,10 +8,10 @@ namespace ProcgenGame.Core;
 sealed class Game1 : Game
 {
     public GraphicsDeviceManager Graphics { get; }
-    public SpriteBatch SpriteBatch { get; private set; }
-    public UpdateEngine UpdateEngine { get; private set; }
-    public GameScene Scene { get; private set; }
-    public AssetStorage Assets { get; private set; }
+    public SpriteBatch SpriteBatch { get; set; }
+    public UpdateEngine UpdateEngine { get; set; }
+    public GameScene Scene { get; set; }
+    public AssetStorage Assets { get; set; }
 
     public Game1()
     {

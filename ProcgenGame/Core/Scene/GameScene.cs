@@ -16,7 +16,7 @@ sealed class GameScene
     public Room Room { get; }
     public Random Rng { get; } = new();
     public int TileSize { get; } = 64;
-    public int Floor { get; private set; } = 1;
+    public int Floor { get; set; } = 1;
 
     public GameScene(Game1 game)
     {
@@ -32,7 +32,7 @@ sealed class GameScene
         //EntityManager.SetPosition(this, new Vector2(0, -3));
     }
 
-    private List<Room> GenerateRooms()
+    List<Room> GenerateRooms()
     {
         var rooms = new List<Room>();
 
@@ -53,7 +53,7 @@ sealed class GameScene
         return rooms;
     }
 
-    private Direction PullRandomItem(List<Direction> items)
+    Direction PullRandomItem(List<Direction> items)
     {
         int index = Rng.Next(items.Count);
         Direction item = items[index];

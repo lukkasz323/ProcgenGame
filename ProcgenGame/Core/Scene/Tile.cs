@@ -2,8 +2,8 @@
 
 sealed class Tile
 {
-    public Rectangle Rectangle { get; private set; }
-    public int Type { get; private set; }
+    public Rectangle Rectangle { get; set; }
+    public int Type { get; set; }
 
     public Tile(int type, Rectangle rectangle)
     {

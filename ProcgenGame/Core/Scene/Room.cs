@@ -2,9 +2,9 @@
 
 sealed class Room
 {
-    private GameScene _scene;
+    GameScene _scene;
 
-    private int[,] _tileTypes = new int[,]
+    int[,] _tileTypes = new int[,]
     {
         { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, },
         { -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, },
@@ -23,9 +23,9 @@ sealed class Room
     public int Width { get => _tileTypes.GetLength(1) * _scene.TileSize; }
     public int Height { get => _tileTypes.GetLength(0) * _scene.TileSize; }
     public Vector2 Center { get => new(Position.X + Width / 2, Position.Y + Height / 2); }
-    public Tile[,] Tiles { get; private set; }
-    public Point FloorPosition { get; private set; }
-    public int Depth { get; private set; }
+    public Tile[,] Tiles { get; set; }
+    public Point FloorPosition { get; set; }
+    public int Depth { get; set; }
 
     public Room(GameScene scene, Point floorPosition, int depth)
     {

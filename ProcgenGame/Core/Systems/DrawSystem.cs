@@ -5,14 +5,14 @@ namespace ProcgenGame.Core.Systems;
 
 class DrawSystem : IUpdateSystem
 {
-    private readonly Game1 _game;
-    private readonly GameScene _scene;
-    private readonly SpriteBatch _batch;
-    private readonly Dictionary<FontName, SpriteFont> _fonts;
-    private readonly Dictionary<TextureName, Texture2D> _textures;
-    private readonly ComponentRegister _componentRegister;
-    private readonly List<DrawComponent> _drawComponents;
-    private readonly List<TransformComponent> _transformComponents;
+    readonly Game1 _game;
+    readonly GameScene _scene;
+    readonly SpriteBatch _batch;
+    readonly Dictionary<FontName, SpriteFont> _fonts;
+    readonly Dictionary<TextureName, Texture2D> _textures;
+    readonly ComponentRegister _componentRegister;
+    readonly List<DrawComponent> _drawComponents;
+    readonly List<TransformComponent> _transformComponents;
 
     public DrawSystem(Game1 game)
     {
@@ -40,7 +40,7 @@ class DrawSystem : IUpdateSystem
         _batch.End();
     }
 
-    private void DrawDebugInfo(GameTime gameTime)
+    void DrawDebugInfo(GameTime gameTime)
     {
         Color fontColor = Color.White;
         int fps = (int)(1 / gameTime.ElapsedGameTime.TotalSeconds);
@@ -54,7 +54,7 @@ class DrawSystem : IUpdateSystem
         _batch.DrawString(_fonts[FontName.Default], $"C: {Debug.C}", new Vector2(4, 680), fontColor);
     }
 
-    private void DrawRoom()
+    void DrawRoom()
     {
         foreach (Tile tile in _scene.Room.Tiles)
         {
@@ -64,7 +64,7 @@ class DrawSystem : IUpdateSystem
         }
     }
 
-    private void DrawEntities()
+    void DrawEntities()
     {
         foreach ((DrawComponent draw, TransformComponent transform) in _drawComponents.Zip(_transformComponents))
         {

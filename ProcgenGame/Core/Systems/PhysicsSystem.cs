@@ -5,11 +5,11 @@ namespace ProcgenGame.Core.Systems;
 
 sealed class PhysicsSystem : IUpdateSystem
 {
-    private readonly Game1 _game;
-    private readonly GameScene _scene;
-    private readonly ComponentRegister _componentRegister;
-    private readonly List<PhysicsComponent> _physicsComponents;
-    private readonly List<TransformComponent> _transformComponents;
+    readonly Game1 _game;
+    readonly GameScene _scene;
+    readonly ComponentRegister _componentRegister;
+    readonly List<PhysicsComponent> _physicsComponents;
+    readonly List<TransformComponent> _transformComponents;
 
     public PhysicsSystem(Game1 game)
     {

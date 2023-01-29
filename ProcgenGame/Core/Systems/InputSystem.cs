@@ -5,9 +5,9 @@ namespace ProcgenGame.Core.Systems;
 /// <summary> Reponsible for processing player inputs for other update systems to act upon. </summary>
 sealed class InputSystem : IUpdateSystem
 {
-    private Game1 _game;
-    private GameScene _scene;
-    private Dictionary<InputAction, bool> _actionLocks = new();
+    Game1 _game;
+    GameScene _scene;
+    Dictionary<InputAction, bool> _actionLocks = new();
 
     public InputSystem(Game1 game)
     {
