@@ -1,4 +1,6 @@
-﻿namespace ProcgenGame.Core.Entities;
+﻿using ProcgenGame.Core.Entities;
+
+namespace ProcgenGame.Core;
 
 public class EntityManager
 {

@@ -1,6 +1,4 @@
-﻿using ProcgenGame.Core.Components;
-
-namespace ProcgenGame.Core.Entities;
+﻿namespace ProcgenGame.Core.Entities;
 
 public class Enemy : Entity
 {

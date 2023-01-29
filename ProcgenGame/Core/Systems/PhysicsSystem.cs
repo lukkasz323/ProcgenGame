@@ -16,8 +16,8 @@ public class PhysicsSystem : IUpdateSystem
         _game = game;
         _scene = game.Scene;
         _componentRegister = game.Scene.ComponentRegister;
-        _physicsComponents = _componentRegister.GetComponentCollection<PhysicsComponent>();
-        _transformComponents = _componentRegister.GetComponentCollection<TransformComponent>();
+        _physicsComponents = _componentRegister.GetComponentsOfType<PhysicsComponent>();
+        _transformComponents = _componentRegister.GetComponentsOfType<TransformComponent>();
     }
 
     public void Process(GameTime gameTime)

@@ -1,14 +1,15 @@
-﻿using ProcgenGame.Core.Systems;
-using ProcgenGame.Core.Scene;
+﻿using ProcgenGame.Core.Scene;
+using ProcgenGame.Core.Systems;
 
 namespace ProcgenGame.Core;
 
-/// <summary> Game starts here and then updates itself till the end. </summary>
+/// <summary> Game starts here and then updates itself till the end.
+/// Methods in this class are called externally by the framework.</summary>
 public class Game1 : Game
 {
     public GraphicsDeviceManager Graphics { get; }
     public SpriteBatch SpriteBatch { get; private set; }
-    public UpdateController UpdateController { get; private set; }
+    public UpdateEngine UpdateEngine { get; private set; }
     public GameScene Scene { get; private set; }
     public AssetStorage Assets { get; private set; }
 
@@ -29,7 +30,7 @@ public class Game1 : Game
         SpriteBatch = new SpriteBatch(GraphicsDevice);
         Assets = new AssetStorage();
         Scene = new GameScene(this);
-        UpdateController = new UpdateController(this);
+        UpdateEngine = new UpdateEngine(this);
 
         Graphics.PreferredBackBufferWidth = 832;
         Graphics.PreferredBackBufferHeight = 704;
@@ -39,9 +40,10 @@ public class Game1 : Game
         base.Initialize();
     }
 
-    /// <summary> Ran after Initalize(). Should be exclusively responsible for loading game assets.</summary>
+    /// <summary> Ran after Initalize().</summary>
     protected override void LoadContent()
     {
+        // Game assets should be only loaded here
         foreach (TextureName textureName in Enum.GetValues<TextureName>())
         {
             Assets.Textures.Add(textureName, Content.Load<Texture2D>($"Textures/{textureName}"));
@@ -56,7 +58,7 @@ public class Game1 : Game
     /// Runs in a loop alongside (before) Draw() till near the end of the game's lifecycle. </summary>
     protected override void Update(GameTime gameTime)
     {
-        UpdateController.Update(gameTime);
+        UpdateEngine.Update(gameTime);
 
         base.Update(gameTime); // Must be last!
     }
@@ -65,7 +67,7 @@ public class Game1 : Game
     /// Runs in a loop alongside (after) Update() till near the end of the game's lifecycle. </summary>
     protected override void Draw(GameTime gameTime)
     {
-        UpdateController.Draw(gameTime);
+        UpdateEngine.Draw(gameTime);
 
         base.Draw(gameTime); // Must be last!
     }

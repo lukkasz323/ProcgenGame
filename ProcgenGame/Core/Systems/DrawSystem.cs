@@ -23,8 +23,8 @@ class DrawSystem : IUpdateSystem
         _textures = game.Assets.Textures;
         _textures = game.Assets.Textures;
         _componentRegister = game.Scene.ComponentRegister;
-        _drawComponents = _componentRegister.GetComponentCollection<DrawComponent>();
-        _transformComponents = _componentRegister.GetComponentCollection<TransformComponent>();
+        _drawComponents = _componentRegister.GetComponentsOfType<DrawComponent>();
+        _transformComponents = _componentRegister.GetComponentsOfType<TransformComponent>();
     }
 
     public void Process(GameTime gameTime)

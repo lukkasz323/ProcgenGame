@@ -11,7 +11,7 @@ public class GameScene
     public ComponentRegister ComponentRegister { get; } = new();
     public EntitySpawner EntitySpawner { get; } = new();
     public EntityManager EntityManager { get; } = new();
-    public Player Player { get; }
+    public Entity Player { get; }
     public List<Room> Rooms { get; }
     public Room Room { get; }
     public Random Rng { get; } = new();
@@ -26,6 +26,8 @@ public class GameScene
         Room = new Room(this, Point.Zero, 0); // <--- to be removed
 
         // New entity creation (Player)
+        Player = new Entity(ComponentRegister);
+        Player.AddComponent<DrawComponent>();
         //EntityManager.AddEntity(new Player());
         //EntityManager.SetPosition(this, new Vector2(0, -3));
     }
