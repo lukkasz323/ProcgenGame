@@ -4,6 +4,7 @@ using ProcgenGame.Core.Input;
 namespace ProcgenGame.Core.Systems;
 
 /// <summary> Reponsible for processing player inputs for other update systems to act upon. </summary>
+[Obsolete("Use InputProcessor instead.")]
 public class InputSystem : IUpdateSystem
 {
     private Game1 _game;
