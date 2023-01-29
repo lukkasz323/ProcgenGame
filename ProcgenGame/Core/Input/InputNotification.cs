@@ -6,7 +6,14 @@ namespace ProcgenGame.Core.Input;
 /// <typeparam name="T">Specifies the focal type of the notification.</typeparam>
 internal sealed class InputNotification<T> : INotification
 {
-    public InputAction RequestedAction { get; set; }
-    public InputNotification(InputAction requestedAction) =>
+    /// <summary>
+    /// The <see cref="InputAction"/> that was requested.
+    /// </summary>
+    internal InputAction RequestedAction { get; set; }
+    /// <summary>
+    /// Creates a new <see cref="InputNotification{T}"/> instance.
+    /// </summary>
+    /// <param name="requestedAction">The <see cref="InputAction"/> that was requested.</param>
+    internal InputNotification(InputAction requestedAction) =>
         RequestedAction = requestedAction;
 }
