@@ -17,7 +17,7 @@ sealed class Game1 : Game
     {
         Graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-
+        
         IsMouseVisible = true;
 
         // FPS Limiter
