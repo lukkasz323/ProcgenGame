@@ -33,8 +33,8 @@ public enum TextureName
     Dirt    = 1,
 }
 
-//[Flags]
-public enum StateFlags
+[Flags]
+public enum PlayerInputs
 {
     None    = 0,
     Up      = 1 << 0,
