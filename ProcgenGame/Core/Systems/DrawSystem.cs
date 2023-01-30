@@ -11,8 +11,8 @@ class DrawSystem : IUpdateSystem
     readonly Dictionary<FontName, SpriteFont> _fonts;
     readonly Dictionary<TextureName, Texture2D> _textures;
     readonly ComponentRegister _componentRegister;
-    readonly List<DrawComponent> _drawComponents;
-    readonly List<TransformComponent> _transformComponents;
+    readonly Dictionary<int, DrawComponent> _drawComponents;
+    readonly Dictionary<int, TransformComponent> _transformComponents;
 
     public DrawSystem(Game1 game)
     {
@@ -20,7 +20,6 @@ class DrawSystem : IUpdateSystem
         _scene = game.Scene;
         _batch = game.SpriteBatch;
         _fonts = game.Assets.Fonts;
-        _textures = game.Assets.Textures;
         _textures = game.Assets.Textures;
         _componentRegister = game.Scene.ComponentRegister;
         _drawComponents = _componentRegister.GetComponentsOfType<DrawComponent>();
@@ -43,12 +42,17 @@ class DrawSystem : IUpdateSystem
     void DrawDebugInfo(GameTime gameTime)
     {
         Color fontColor = Color.White;
-        int fps = (int)(1 / gameTime.ElapsedGameTime.TotalSeconds);
+        var fps = (int)(1 / gameTime.ElapsedGameTime.TotalSeconds);
+        var playerTransform = _scene.Player.GetComponent<TransformComponent>();
+        var playerPhysics = _scene.Player.GetComponent<PhysicsComponent>();
+        var playerDraw = _scene.Player.GetComponent<DrawComponent>();
 
         _batch.DrawString(_fonts[FontName.Default], $"{fps}", new Vector2(4, 0), fontColor);
-        //_batch.DrawString(_fonts[FontName.Default], $"P: {_scene.Player.Position}", new Vector2(4, 20), fontColor);
-        //_batch.DrawString(_fonts[FontName.Default], $"V: {_scene.Player.Velocity}", new Vector2(4, 40), fontColor);
-
+        _batch.DrawString(_fonts[FontName.Default], $"P: {playerTransform.Position}", new Vector2(4, 20), fontColor);
+        _batch.DrawString(_fonts[FontName.Default], $"V: {playerPhysics.Velocity}", new Vector2(4, 40), fontColor);
+        Debug.A = playerDraw.Color;
+        Debug.B = playerDraw.TextureName;
+        Debug.C = playerDraw.EntityId;
         _batch.DrawString(_fonts[FontName.Default], $"A: {Debug.A}", new Vector2(4, 640), fontColor);
         _batch.DrawString(_fonts[FontName.Default], $"B: {Debug.B}", new Vector2(4, 660), fontColor);
         _batch.DrawString(_fonts[FontName.Default], $"C: {Debug.C}", new Vector2(4, 680), fontColor);
@@ -66,8 +70,10 @@ class DrawSystem : IUpdateSystem
 
     void DrawEntities()
     {
-        foreach ((DrawComponent draw, TransformComponent transform) in _drawComponents.Zip(_transformComponents))
+        foreach (DrawComponent draw in _drawComponents.Values)
         {
+            TransformComponent transform = _transformComponents[draw.EntityId];
+
             _batch.Draw(
                 texture: _textures[draw.TextureName],
                 destinationRectangle: new Rectangle(

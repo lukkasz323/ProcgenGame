@@ -8,9 +8,9 @@ sealed class GameScene
 {
     readonly Game1 _game;
 
+    public EntityRegister EntityRegister { get; } = new();
     public ComponentRegister ComponentRegister { get; } = new();
-    public EntitySpawner EntitySpawner { get; } = new();
-    public EntityManager EntityManager { get; } = new();
+    public EntitySpawner EntitySpawner { get; }
     public Entity Player { get; }
     public List<Room> Rooms { get; }
     public Room Room { get; }
@@ -22,14 +22,14 @@ sealed class GameScene
     {
         _game = game;
 
+        EntitySpawner = new EntitySpawner(EntityRegister, ComponentRegister);
+
         Rooms = GenerateRooms();
         Room = new Room(this, Point.Zero, 0); // <--- to be removed
 
         // New entity creation (Player)
-        Player = new Entity(ComponentRegister);
-        Player.AddComponent<DrawComponent>();
-        //EntityManager.AddEntity(new Player());
-        //EntityManager.SetPosition(this, new Vector2(0, -3));
+        Player = EntitySpawner.SpawnPlayer();
+        
     }
 
     List<Room> GenerateRooms()

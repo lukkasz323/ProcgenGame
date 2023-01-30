@@ -8,8 +8,8 @@ sealed class PhysicsSystem : IUpdateSystem
     readonly Game1 _game;
     readonly GameScene _scene;
     readonly ComponentRegister _componentRegister;
-    readonly List<PhysicsComponent> _physicsComponents;
-    readonly List<TransformComponent> _transformComponents;
+    readonly Dictionary<int, PhysicsComponent> _physicsComponents;
+    readonly Dictionary<int, TransformComponent> _transformComponents;
 
     public PhysicsSystem(Game1 game)
     {
@@ -22,8 +22,10 @@ sealed class PhysicsSystem : IUpdateSystem
 
     public void Process(GameTime gameTime)
     {
-        foreach ((PhysicsComponent physics, TransformComponent transform) in _physicsComponents.Zip(_transformComponents))
+        foreach (PhysicsComponent physics in _physicsComponents.Values)
         {
+            TransformComponent transform = _transformComponents[physics.EntityId];
+
             transform.Position += physics.Velocity;
             physics.Velocity -= physics.Velocity * 0.2f;
         }

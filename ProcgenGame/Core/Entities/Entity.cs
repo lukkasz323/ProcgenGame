@@ -6,11 +6,13 @@ class Entity
 {
     readonly int _id = GlobalState.AutoId();
     readonly List<Component> _components = new();
+    readonly EntityRegister _entityRegister;
     readonly ComponentRegister _componentRegister;
 
-    public Entity(ComponentRegister componentManager)
+    internal Entity(EntityRegister entityRegister, ComponentRegister componentRegister)
     {
-        _componentRegister = componentManager;
+        _entityRegister = entityRegister;
+        _componentRegister = componentRegister;
     }
 
     public T GetComponent<T>()
@@ -26,10 +28,11 @@ class Entity
         throw new InvalidOperationException($"Required item was not found.");
     }
 
-    public void AddComponent<T>()
-        where T : Component, new()
+    public void AddComponent<T>(T component)
+        where T : Component
     {
-        var component = new T();
+        ArgumentNullException.ThrowIfNull(component);
+
         component.EntityId = _id;
         _components.Add(component);
         _componentRegister.RegisterComponent(component);

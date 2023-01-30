@@ -4,7 +4,7 @@ sealed class Room
 {
     GameScene _scene;
 
-    int[,] _tileTypes = new int[,]
+    readonly int[,] _tileTypes = new int[,]
     {
         { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, },
         { -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, },
