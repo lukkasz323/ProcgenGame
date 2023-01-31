@@ -5,9 +5,10 @@ sealed class ComponentRegister
 {
     readonly Dictionary<Type, IDictionary> _componentCollections = new()
     {
+        { typeof(DrawComponent), new Dictionary<int, DrawComponent>() },
         { typeof(TransformComponent), new Dictionary<int, TransformComponent>() },
         { typeof(PhysicsComponent), new Dictionary<int, PhysicsComponent>() },
-        { typeof(DrawComponent), new Dictionary<int, DrawComponent>() },
+        { typeof(CollisionComponent), new Dictionary<int, CollisionComponent>() },
     };
 
     public Dictionary<int, T> GetComponentsOfType<T>()

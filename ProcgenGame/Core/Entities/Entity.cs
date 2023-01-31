@@ -29,7 +29,7 @@ class Entity
     }
 
     public void AddComponent<T>(T component)
-        where T : Component
+        where T : notnull, Component
     {
         ArgumentNullException.ThrowIfNull(component);
 

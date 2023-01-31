@@ -13,13 +13,14 @@ sealed class EntitySpawner
         _componentRegister = componentRegister;
     }
 
-    public Entity SpawnPlayer()
+    public Entity SpawnPlayer(Vector2 position = new Vector2())
     {
         var entity = new Entity(_entityRegister, _componentRegister);
 
-        entity.AddComponent(new TransformComponent() { Size = 32 });
-        entity.AddComponent(new PhysicsComponent());
-        entity.AddComponent(new DrawComponent());
+        entity.AddComponent(new TransformComponent() { Position = position, Size = 32 });
+        entity.AddComponent(new PhysicsComponent() { Speed = 100 });
+        entity.AddComponent(new CollisionComponent() { IsSolid = true }); 
+        entity.AddComponent(new DrawComponent() { Color = Color.Red });
 
         return entity;
     }

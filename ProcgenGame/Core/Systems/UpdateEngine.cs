@@ -1,11 +1,13 @@
-﻿namespace ProcgenGame.Core.Systems;
+﻿using Microsoft.Xna.Framework;
+
+namespace ProcgenGame.Core.Systems;
 
 /// <summary> Updates the game state, to be used in a main game loop. </summary>
 sealed class UpdateEngine
 {
-    readonly DrawSystem _draw;
-    readonly InputSystem _input;
-    readonly PhysicsSystem _physics;
+    readonly IUpdateSystem _draw;
+    readonly IUpdateSystem _input;
+    readonly IUpdateSystem _physics;
 
     public UpdateEngine(Game1 game)
     {
