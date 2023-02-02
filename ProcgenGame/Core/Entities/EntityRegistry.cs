@@ -1,7 +1,7 @@
 ﻿namespace ProcgenGame.Core.Entities;
 
 /// <summary> Registers entities for access by ID. </summary>
-sealed class EntityRegister
+sealed class EntityRegistry
 {
     readonly Dictionary<int, Entity> _entitiesById = new();
     
