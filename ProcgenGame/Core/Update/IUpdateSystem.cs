@@ -1,4 +1,4 @@
-﻿namespace ProcgenGame.Core.Systems;
+﻿namespace ProcgenGame.Core.Update;
 
 public interface IUpdateSystem
 {

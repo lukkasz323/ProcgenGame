@@ -1,7 +1,7 @@
 ﻿using ProcgenGame.Core.Components;
 using ProcgenGame.Core.Scene;
 
-namespace ProcgenGame.Core.Systems;
+namespace ProcgenGame.Core.Update;
 
 class DrawSystem : IUpdateSystem
 {
@@ -10,7 +10,7 @@ class DrawSystem : IUpdateSystem
     readonly SpriteBatch _batch;
     readonly Dictionary<FontName, SpriteFont> _fonts;
     readonly Dictionary<TextureName, Texture2D> _textures;
-    readonly ComponentRegister _componentRegister;
+    readonly ComponentRegistry _componentRegister;
     readonly Dictionary<int, DrawComponent> _drawComponents;
     readonly Dictionary<int, TransformComponent> _transformComponents;
 
@@ -21,7 +21,7 @@ class DrawSystem : IUpdateSystem
         _batch = game.SpriteBatch;
         _fonts = game.Assets.Fonts;
         _textures = game.Assets.Textures;
-        _componentRegister = game.Scene.ComponentRegister;
+        _componentRegister = game.Scene.ComponentRegistry;
         _drawComponents = _componentRegister.GetComponentsOfType<DrawComponent>();
         _transformComponents = _componentRegister.GetComponentsOfType<TransformComponent>();
     }
@@ -45,14 +45,11 @@ class DrawSystem : IUpdateSystem
         var fps = (int)(1 / gameTime.ElapsedGameTime.TotalSeconds);
         var playerTransform = _scene.Player.GetComponent<TransformComponent>();
         var playerPhysics = _scene.Player.GetComponent<PhysicsComponent>();
-        var playerDraw = _scene.Player.GetComponent<DrawComponent>();
 
         _batch.DrawString(_fonts[FontName.Default], $"{fps}", new Vector2(4, 0), fontColor);
-        _batch.DrawString(_fonts[FontName.Default], $"P: {playerTransform.Position}", new Vector2(4, 20), fontColor);
-        _batch.DrawString(_fonts[FontName.Default], $"V: {playerPhysics.Velocity}", new Vector2(4, 40), fontColor);
-        Debug.A = playerDraw.Color;
-        Debug.B = playerDraw.TextureName;
-        Debug.C = playerDraw.EntityId;
+        Debug.A = playerPhysics.Speed;
+        Debug.B = playerPhysics.Velocity;
+        Debug.C = playerTransform.Position;
         _batch.DrawString(_fonts[FontName.Default], $"A: {Debug.A}", new Vector2(4, 640), fontColor);
         _batch.DrawString(_fonts[FontName.Default], $"B: {Debug.B}", new Vector2(4, 660), fontColor);
         _batch.DrawString(_fonts[FontName.Default], $"C: {Debug.C}", new Vector2(4, 680), fontColor);
