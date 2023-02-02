@@ -5,21 +5,19 @@ namespace ProcgenGame.Core.Update;
 
 sealed class PhysicsSystem : IUpdateSystem
 {
-    readonly Game1 _game;
     readonly GameScene _scene;
-    readonly ComponentRegistry _componentRegister;
+    readonly ComponentRegistry _componentRegistry;
     readonly Dictionary<int, PhysicsComponent> _physicsComponents;
     readonly Dictionary<int, TransformComponent> _transformComponents;
     readonly Dictionary<int, InputComponent> _inputComponents;
 
-    public PhysicsSystem(Game1 game)
+    public PhysicsSystem(GameScene scene)
     {
-        _game = game;
-        _scene = game.Scene;
-        _componentRegister = _scene.ComponentRegistry;
-        _physicsComponents = _componentRegister.GetComponentsOfType<PhysicsComponent>();
-        _transformComponents = _componentRegister.GetComponentsOfType<TransformComponent>();
-        _inputComponents = _componentRegister.GetComponentsOfType<InputComponent>();
+        _scene = scene;
+        _componentRegistry = scene.ComponentRegistry;
+        _physicsComponents = _componentRegistry.GetComponentsOfType<PhysicsComponent>();
+        _transformComponents = _componentRegistry.GetComponentsOfType<TransformComponent>();
+        _inputComponents = _componentRegistry.GetComponentsOfType<InputComponent>();
     }
 
     public void Process(GameTime gameTime)
