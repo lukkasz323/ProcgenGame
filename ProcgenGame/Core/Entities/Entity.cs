@@ -6,10 +6,10 @@ class Entity
 {
     readonly int _id = GlobalState.AutoId();
     readonly List<Component> _components = new();
-    readonly EntityRegister _entityRegister;
-    readonly ComponentRegister _componentRegister;
+    readonly EntityRegistry _entityRegister;
+    readonly ComponentRegistry _componentRegister;
 
-    internal Entity(EntityRegister entityRegister, ComponentRegister componentRegister)
+    internal Entity(EntityRegistry entityRegister, ComponentRegistry componentRegister)
     {
         _entityRegister = entityRegister;
         _componentRegister = componentRegister;

@@ -8,8 +8,8 @@ sealed class GameScene
 {
     readonly Game1 _game;
 
-    public EntityRegister EntityRegister { get; } = new();
-    public ComponentRegister ComponentRegister { get; } = new();
+    public EntityRegistry EntityRegistry { get; } = new();
+    public ComponentRegistry ComponentRegistry { get; } = new();
     public EntitySpawner EntitySpawner { get; }
     public Entity Player { get; }
     public List<Room> Rooms { get; }
@@ -22,7 +22,7 @@ sealed class GameScene
     {
         _game = game;
 
-        EntitySpawner = new EntitySpawner(EntityRegister, ComponentRegister);
+        EntitySpawner = new EntitySpawner(EntityRegistry, ComponentRegistry);
 
         Rooms = GenerateRooms();
         Room = new Room(this, Point.Zero, 0); // <--- to be removed

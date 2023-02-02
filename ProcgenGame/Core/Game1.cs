@@ -1,5 +1,5 @@
 ﻿using ProcgenGame.Core.Scene;
-using ProcgenGame.Core.Systems;
+using ProcgenGame.Core.Update;
 
 namespace ProcgenGame.Core;
 
