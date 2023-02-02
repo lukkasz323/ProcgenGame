@@ -7,9 +7,10 @@ namespace ProcgenGame.Core;
 /// Methods in this class are called externally by the framework.</summary>
 sealed class Game1 : Game
 {
+    UpdateEngine _updateEngine;
+
     public GraphicsDeviceManager Graphics { get; }
     public SpriteBatch SpriteBatch { get; set; }
-    public UpdateEngine UpdateEngine { get; set; }
     public GameScene Scene { get; set; }
     public AssetStorage Assets { get; set; }
 
@@ -30,7 +31,7 @@ sealed class Game1 : Game
         SpriteBatch = new SpriteBatch(GraphicsDevice);
         Assets = new AssetStorage();
         Scene = new GameScene(this);
-        UpdateEngine = new UpdateEngine(this);
+        _updateEngine = new UpdateEngine(this);
 
         Graphics.PreferredBackBufferWidth = 832;
         Graphics.PreferredBackBufferHeight = 704;
@@ -58,7 +59,7 @@ sealed class Game1 : Game
     /// Runs in a loop alongside (before) Draw() till near the end of the game's lifecycle. </summary>
     protected override void Update(GameTime gameTime)
     {
-        UpdateEngine.Update(gameTime);
+        _updateEngine.Update(gameTime);
 
         base.Update(gameTime); // Must be last!
     }
@@ -67,7 +68,7 @@ sealed class Game1 : Game
     /// Runs in a loop alongside (after) Update() till near the end of the game's lifecycle. </summary>
     protected override void Draw(GameTime gameTime)
     {
-        UpdateEngine.Draw(gameTime);
+        _updateEngine.Draw(gameTime);
 
         base.Draw(gameTime); // Must be last!
     }
