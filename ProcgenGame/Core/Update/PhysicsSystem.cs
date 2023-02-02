@@ -48,8 +48,8 @@ sealed class PhysicsSystem : IUpdateSystem
         {
             TransformComponent transform = _transformComponents[physics.EntityId];
 
-            transform.Position += physics.Velocity * 5f;
-            physics.Velocity -= physics.Velocity;
+            transform.Position += physics.Velocity;
+            physics.Velocity -= physics.Velocity * 0.2f;
         }
     }
 }
