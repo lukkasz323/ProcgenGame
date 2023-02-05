@@ -60,7 +60,7 @@ sealed class InputSystem : IUpdateSystem
 
         // Fullscreen
         action = InputAction.ToggleFullscreen;
-        if (!_actionLocks[action])
+        //if (!_actionLocks[action])
         {
             if (keyboard.IsKeyDown(Keys.LeftAlt) && keyboard.IsKeyDown(Keys.Enter))
             {
@@ -69,12 +69,22 @@ sealed class InputSystem : IUpdateSystem
                 _actionLocks[action] = true;
             }
         }
+        //else
+        {
+            //if (keyboard.IsKeyUp(Keys.LeftAlt) || keyboard.IsKeyUp(Keys.Enter))
+            {
+            //_actionLocks[action] = false;
+            }
+        }
+
+        //Debug
+        if (keyboard.IsKeyDown(Keys.LeftShift))
+        {
+            _game.IsFixedTimeStep = false;
+        }
         else
         {
-            if (keyboard.IsKeyUp(Keys.LeftAlt) || keyboard.IsKeyUp(Keys.Enter))
-            {
-                _actionLocks[action] = false;
-            }
+            _game.IsFixedTimeStep = true;
         }
     }
 }
