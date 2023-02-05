@@ -1,5 +1,6 @@
 ﻿using ProcgenGame.Core.Components;
 using ProcgenGame.Core.Scene;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ProcgenGame.Core.Update;
 
@@ -41,18 +42,27 @@ class DrawSystem : IUpdateSystem
 
     void DrawDebugInfo(GameTime gameTime)
     {
-        Color fontColor = Color.White;
-        var fps = (int)(1 / gameTime.ElapsedGameTime.TotalSeconds);
+        SpriteFont defaultFont = _fonts[FontName.Default];
+        Color defaultColor = Color.White;
+
         var playerTransform = _scene.Player.GetComponent<TransformComponent>();
         var playerPhysics = _scene.Player.GetComponent<PhysicsComponent>();
+        var fps = (int)(1 / gameTime.ElapsedGameTime.TotalSeconds);
+        var px = playerTransform.Position.X;
+        var py = playerTransform.Position.Y;
+        var vx = playerPhysics.Velocity.X;
+        var vy = playerPhysics.Velocity.Y;
+        var ax = playerPhysics.Acceleration.X;
+        var ay = playerPhysics.Acceleration.Y;
 
-        _spriteBatch.DrawString(_fonts[FontName.Default], $"{fps}", new Vector2(4, 0), fontColor);
-        Debug.A = playerPhysics.Speed;
-        Debug.B = playerPhysics.Velocity;
-        Debug.C = playerTransform.Position;
-        _spriteBatch.DrawString(_fonts[FontName.Default], $"A: {Debug.A}", new Vector2(4, 640), fontColor);
-        _spriteBatch.DrawString(_fonts[FontName.Default], $"B: {Debug.B}", new Vector2(4, 660), fontColor);
-        _spriteBatch.DrawString(_fonts[FontName.Default], $"C: {Debug.C}", new Vector2(4, 680), fontColor);
+        _spriteBatch.DrawString(defaultFont, $"{fps}", new Vector2(4, 0), defaultColor);
+
+        _spriteBatch.DrawString(defaultFont, $"Ax {ax}", new Vector2(4, 540), defaultColor);
+        _spriteBatch.DrawString(defaultFont, $"Ay {ay}", new Vector2(4, 560), defaultColor);
+        _spriteBatch.DrawString(defaultFont, $"Vx {vx}", new Vector2(4, 600), defaultColor);
+        _spriteBatch.DrawString(defaultFont, $"Vy {vy}", new Vector2(4, 620), defaultColor);
+        _spriteBatch.DrawString(defaultFont, $"Px {px}", new Vector2(4, 660), defaultColor);
+        _spriteBatch.DrawString(defaultFont, $"Py {py}", new Vector2(4, 680), defaultColor);
     }
 
     void DrawRoom()
