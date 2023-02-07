@@ -13,13 +13,12 @@ sealed class ComponentRegistry
         var allComponentTypes = typeof(ComponentRegistry).Assembly.GetTypes().Where(x => x.IsSubclassOf(typeof(Component)));
         foreach (Type type in allComponentTypes)
         {
-            var collection = (IDictionary)Activator.CreateInstance(typeof(Dictionary<,>).MakeGenericType(typeof(int), type))!;
-            _componentCollections.Add(type, collection);
+            _componentCollections.Add(type, (IDictionary)Activator.CreateInstance(typeof(Dictionary<,>).MakeGenericType(typeof(int), type)));
         }
     }
 
     public Dictionary<int, T> GetComponentsOfType<T>()
-        where T : Component 
+        where T : Component
     {
         return (Dictionary<int, T>)_componentCollections[typeof(T)];
     }

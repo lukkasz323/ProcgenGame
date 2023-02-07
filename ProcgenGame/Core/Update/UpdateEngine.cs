@@ -2,7 +2,7 @@
 
 namespace ProcgenGame.Core.Update;
 
-/// <summary> Updates the game state, to be used the a main game loop. </summary>
+/// <summary> Updates the game state, to be used in a main game loop. </summary>
 sealed class UpdateEngine
 {
     readonly Game1 _game;

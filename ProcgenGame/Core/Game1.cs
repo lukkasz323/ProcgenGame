@@ -14,13 +14,8 @@ sealed class Game1 : Game
     public GameScene Scene { get; set; }
     public AssetStorage Assets { get; set; }
 
-#pragma warning disable CS8618
     public Game1()
-#pragma warning restore CS8618
     {
-        Assets = new AssetStorage();
-        Scene = new GameScene(this);
-
         Graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         
@@ -28,13 +23,14 @@ sealed class Game1 : Game
 
         // FPS Limiter
         IsFixedTimeStep = false;
-        
     }
 
     /// <summary> Ran after the constructor. </summary>
     protected override void Initialize()
     {
         SpriteBatch = new SpriteBatch(GraphicsDevice);
+        Assets = new AssetStorage();
+        Scene = new GameScene(this);
         _updateEngine = new UpdateEngine(this);
 
         Graphics.PreferredBackBufferWidth = 832;
@@ -65,7 +61,7 @@ sealed class Game1 : Game
     {
         _updateEngine.Update(gameTime);
 
-        base.Update(gameTime);
+        base.Update(gameTime); // Must be last!
     }
 
     /// <summary> Ran first after Update().
@@ -74,6 +70,6 @@ sealed class Game1 : Game
     {
         _updateEngine.Draw(gameTime);
 
-        base.Draw(gameTime);
+        base.Draw(gameTime); // Must be last!
     }
 }
