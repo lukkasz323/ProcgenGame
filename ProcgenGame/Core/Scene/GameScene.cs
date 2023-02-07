@@ -28,7 +28,7 @@ sealed class GameScene
         Room = new Room(this, Point.Zero, 0); // <--- to be removed
 
         // New entity creation (Player)
-        Player = EntitySpawner.SpawnPlayer(new Vector2(400, 300));
+        Player = EntitySpawner.SpawnPlayer();
         
     }
 

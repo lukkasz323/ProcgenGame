@@ -1,12 +1,10 @@
 ﻿using ProcgenGame.Core.Scene;
 using ProcgenGame.Core.Update;
-using System.Runtime.CompilerServices;
 
 namespace ProcgenGame.Core;
 
-/// <summary> Game starts here and then updates itself till the end. <br/><br/>
-/// Overriden methods Initialize(), LoadContent(), Update(), Draw()...
-/// in this class are called externally by the Game base-class from the MonoGame (Xna) framework.</summary>
+/// <summary> Game starts here and then updates itself till the end.
+/// Methods in this class are called externally by the framework.</summary>
 sealed class Game1 : Game
 {
     UpdateEngine _updateEngine;
@@ -27,6 +25,10 @@ sealed class Game1 : Game
         Content.RootDirectory = "Content";
         
         IsMouseVisible = true;
+
+        // FPS Limiter
+        IsFixedTimeStep = false;
+        
     }
 
     /// <summary> Ran after the constructor. </summary>
@@ -43,7 +45,7 @@ sealed class Game1 : Game
         base.Initialize();
     }
 
-    /// <summary> Ran after Initalize(). </summary>
+    /// <summary> Ran after Initalize().</summary>
     protected override void LoadContent()
     {
         // Game assets should be only loaded here

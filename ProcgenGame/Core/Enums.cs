@@ -3,7 +3,6 @@
 public enum InputAction
 {
     None,
-    Debug1,
     ToggleFullscreen,
 }
 

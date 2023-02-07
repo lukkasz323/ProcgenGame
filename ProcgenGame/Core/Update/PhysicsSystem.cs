@@ -5,8 +5,6 @@ namespace ProcgenGame.Core.Update;
 
 sealed class PhysicsSystem : IUpdateSystem
 {
-    readonly float Responsiveness = 10f;
-
     readonly GameScene _scene;
     readonly ComponentRegistry _componentRegistry;
     readonly Dictionary<int, PhysicsComponent> _physicsComponents;
@@ -24,47 +22,34 @@ sealed class PhysicsSystem : IUpdateSystem
 
     public void Process(GameTime gameTime)
     {
-        float deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-        ProcessPlayerAcceleration();
-        ProcessVelocityAndPosition(deltaSeconds);
+        HandlePlayerVelocity(gameTime);
+        ProcessEntities();
     }
 
-    void ProcessPlayerAcceleration()
+    void HandlePlayerVelocity(GameTime gameTime)
     {
         foreach (InputComponent input in _inputComponents.Values)
         {
             PhysicsComponent physics = _physicsComponents[input.EntityId];
 
-            Vector2 dir = Vector2.Zero;
-
             PlayerInputs inputFlags = input.InputFlags;
-            if ((inputFlags & PlayerInputs.Up) != 0) dir.Y += -1f;
-            if ((inputFlags & PlayerInputs.Down) != 0) dir.Y += 1f;
-            if ((inputFlags & PlayerInputs.Left) != 0) dir.X += -1f;
-            if ((inputFlags & PlayerInputs.Right) != 0) dir.X += 1f;
+            float acceleration = (float)gameTime.ElapsedGameTime.TotalSeconds * physics.Speed;
 
-            if (dir != Vector2.Zero)
-            {
-                dir.Normalize();
-            }
-
-            physics.Acceleration = dir * physics.Speed;
+            if ((inputFlags & PlayerInputs.Up) != 0) physics.Velocity += new Vector2(0, -acceleration);
+            if ((inputFlags & PlayerInputs.Down) != 0) physics.Velocity += new Vector2(0, acceleration);
+            if ((inputFlags & PlayerInputs.Left) != 0) physics.Velocity += new Vector2(-acceleration, 0);
+            if ((inputFlags & PlayerInputs.Right) != 0) physics.Velocity += new Vector2(acceleration, 0);
         }
     }
 
-    void ProcessVelocityAndPosition(float deltaSeconds)
+    void ProcessEntities()
     {
         foreach (PhysicsComponent physics in _physicsComponents.Values)
         {
             TransformComponent transform = _transformComponents[physics.EntityId];
 
-            // Velocity
-            physics.Velocity -= (physics.Velocity * Responsiveness) * deltaSeconds;
-            physics.Velocity += (physics.Acceleration * Responsiveness) * deltaSeconds;
-
-            // Position
-            transform.Position += (physics.Velocity) * deltaSeconds;
+            transform.Position += physics.Velocity;
+            physics.Velocity -= physics.Velocity * 0.2f;
         }
     }
 }
