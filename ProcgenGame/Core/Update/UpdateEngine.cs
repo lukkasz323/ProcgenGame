@@ -1,20 +1,18 @@
-﻿using ProcgenGame.Core.Scene;
+﻿using Microsoft.Xna.Framework;
 
 namespace ProcgenGame.Core.Update;
 
 /// <summary> Updates the game state, to be used in a main game loop. </summary>
 sealed class UpdateEngine
 {
-    readonly Game1 _game;
     readonly IUpdateSystem _draw;
     readonly IUpdateSystem _input;
     readonly IUpdateSystem _physics;
 
     public UpdateEngine(Game1 game)
     {
-        _game = game;
         _input = new InputSystem(game);
-        _physics = new PhysicsSystem(game.Scene);
+        _physics = new PhysicsSystem(game);
         _draw = new DrawSystem(game);
     }
 

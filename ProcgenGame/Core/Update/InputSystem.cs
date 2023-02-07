@@ -16,7 +16,7 @@ sealed class InputSystem : IUpdateSystem
     {
         _game = game;
         _scene = game.Scene;
-        _componentRegistry = game.Scene.ComponentRegistry;
+        _componentRegistry = _scene.ComponentRegistry;
         _inputComponents = _componentRegistry.GetComponentsOfType<InputComponent>();
 
         foreach (InputAction action in Enum.GetValues<InputAction>())
