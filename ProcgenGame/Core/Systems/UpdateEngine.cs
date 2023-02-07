@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace ProcgenGame.Core.Update;
+namespace ProcgenGame.Core.Systems;
 
 /// <summary> Updates the game state, to be used in a main game loop. </summary>
 sealed class UpdateEngine
