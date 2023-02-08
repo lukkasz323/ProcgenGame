@@ -28,18 +28,18 @@ public enum FontName
 
 public enum TextureName
 {
-    Debug1  = -9,
-    Border  = -1,
-    White   = 0,
-    Dirt    = 1,
+    Debug1 = -9,
+    Border = -1,
+    White = 0,
+    Dirt = 1,
 }
 
 [Flags]
 public enum PlayerInputs
 {
-    None    = 0,
-    Up      = 1 << 0,
-    Down    = 1 << 1,
-    Left    = 1 << 2,
-    Right   = 1 << 3,
+    None = 0,
+    Up = 1 << 0,
+    Down = 1 << 1,
+    Left = 1 << 2,
+    Right = 1 << 3,
 }

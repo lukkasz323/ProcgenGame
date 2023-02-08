@@ -29,7 +29,7 @@ sealed class GameScene
 
         // New entity creation (Player)
         Player = EntitySpawner.SpawnPlayer(new Vector2(400, 300));
-        
+
     }
 
     List<Room> GenerateRooms()

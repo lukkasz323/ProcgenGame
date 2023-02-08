@@ -73,7 +73,7 @@ sealed class InputSystem : IUpdateSystem
         {
             //if (keyboard.IsKeyUp(Keys.LeftAlt) || keyboard.IsKeyUp(Keys.Enter))
             {
-            //_actionLocks[action] = false;
+                //_actionLocks[action] = false;
             }
         }
 

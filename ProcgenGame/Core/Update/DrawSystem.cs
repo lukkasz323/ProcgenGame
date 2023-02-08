@@ -1,6 +1,5 @@
 ﻿using ProcgenGame.Core.Components;
 using ProcgenGame.Core.Scene;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ProcgenGame.Core.Update;
 

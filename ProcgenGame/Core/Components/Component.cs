@@ -1,6 +1,4 @@
-﻿using ProcgenGame.Core.Entities;
-
-namespace ProcgenGame.Core.Components;
+﻿namespace ProcgenGame.Core.Components;
 
 public abstract class Component
 {
