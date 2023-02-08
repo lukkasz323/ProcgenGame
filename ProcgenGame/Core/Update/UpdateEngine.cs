@@ -1,6 +1,4 @@
-﻿using ProcgenGame.Core.Scene;
-
-namespace ProcgenGame.Core.Update;
+﻿namespace ProcgenGame.Core.Update;
 
 /// <summary> Updates the game state, to be used the a main game loop. </summary>
 sealed class UpdateEngine

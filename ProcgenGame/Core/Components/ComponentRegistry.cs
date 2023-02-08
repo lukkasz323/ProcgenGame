@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace ProcgenGame.Core.Components;
+﻿namespace ProcgenGame.Core.Components;
 
 /// <summary> Registers components for update systems to use. </summary>
 sealed class ComponentRegistry
@@ -19,7 +17,7 @@ sealed class ComponentRegistry
     }
 
     public Dictionary<int, T> GetComponentsOfType<T>()
-        where T : Component 
+        where T : Component
     {
         return (Dictionary<int, T>)_componentCollections[typeof(T)];
     }

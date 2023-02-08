@@ -2,5 +2,5 @@
 
 sealed class CollisionComponent : Component
 {
-    public bool IsSolid{ get; set; }
+    public bool IsSolid { get; set; }
 }
